@@ -1,4 +1,76 @@
 # Docker
+
+# 启动
+
+- ### ros1:main
+
+```
+xhost +local:`docker inspect --format='{{ .Config.Hostname }}' $containerId`
+xhost +local:`docker inspect --format='{{ .Config.Hostname }}' ros1`
+docker start $containerId
+docker exec -it your_name /bin/bash
+docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
+```
+
+```
+docker run -it --rm \
+    --gpus all \
+    --group-add video \
+    --device=/dev/video0 \
+    --env="DISPLAY=:0" \
+    --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+    --volume="/home/wys/Documents:/home/wys/Documents" \
+    --device=/dev/dri \
+    --device=/dev/ttyUSB0 \
+    --shm-size=8g \
+    --env="GDK_SYNCHRONIZE=1" \
+    --name ros1 \
+    ros1:main \
+    /bin/bash
+```
+
+```
+docker run -it --rm  \   退出后自动删除容器！！！记得commit
+	--gpus all \	GPU使能
+	-group-add video \ 访问所有视频设备
+	--device=/dev/video0 \	外接设备
+    --device=/dev/video2 \ 
+    --env="DISPLAY=:0" \	访问主机图形界面，x服务器
+    --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \ 主机挂在Docker容器内部，文件共享，容器内部访问主机的 X11 UNIX 套接字，从而实现图形界面应用程序的显示和交互
+	--device=/dev/dri \ 主机图形硬件
+    --device=/dev/bus/usb/0  \usb驱动
+	--shm-size=8g \增加docker容器共享内存
+	--env="GDK_SYNCHRONIZE=1" \ 禁用MIT-SHM扩展，解决一些X Window系统错误
+	--name xxx \  命名
+    ros1:main \ 
+    /bin/bash
+```
+
+- ### 相机显示
+
+```
+docker run -it --rm     --gpus all     --group-add video     --device=/dev/video0     --device=/dev/video2     --env="DISPLAY=:0"     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw"     --volume="/home/wys/Documents:/home/wys/Documents"     --device=/dev/dri     --shm-size=8g     --env="GDK_SYNCHRONIZE=1"     --name ros1     ros1:main     /bin/bash
+```
+
+```
+docker run -it \
+    --device=/dev/video0 \	外接设备
+    --device=/dev/video2 \ 
+    --env="DISPLAY" \	访问主机图形界面，x服务器
+    --env "ENV_VAR_NAME=value"
+    -e "ENV_VAR_NAME=value"  
+    -v /host/data:/container/data
+    --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \ 主机挂在Docker容器内部，文件共享，容器内部访问主机的 X11 UNIX 套接字，从而实现图形界面应用程序的显示和交互
+    --name ros_noetic_usb_cam_container \  命名
+    ros-noetic-usb-cam 镜像id | name
+```
+
+
+
+
+
+
+
 # 导出&导出镜像容器
 
 ```
