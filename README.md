@@ -15,11 +15,11 @@ docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
 ```
 docker run -it --rm \
     --gpus all \
-    --group-add video \
+    --group-add 44 \
     --device=/dev/video0 \
     --env="DISPLAY=:0" \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-    --volume="/home/wys/Documents:/home/wys/Documents" \
+    --volume="/home/wys/Desktop/Project" \
     --device=/dev/dri \
     --device=/dev/ttyUSB0 \
     --shm-size=8g \
