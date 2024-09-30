@@ -19,7 +19,7 @@ docker run -it --rm \
     --device=/dev/video0 \
     --env="DISPLAY=:0" \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-    --volume="/home/wys/Desktop/Project" \
+    --volume="/home/wys/Desktop/Project:/home/wys/" \
     --device=/dev/dri \
     --device=/dev/ttyUSB0 \
     --shm-size=8g \
@@ -37,8 +37,9 @@ docker run -it --rm  \   退出后自动删除容器！！！记得commit
     --device=/dev/video2 \ 
     --env="DISPLAY=:0" \	访问主机图形界面，x服务器
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \ 主机挂在Docker容器内部，文件共享，容器内部访问主机的 X11 UNIX 套接字，从而实现图形界面应用程序的显示和交互
-	--device=/dev/dri \ 主机图形硬件
-    --device=/dev/bus/usb/0  \usb驱动
+    --volume="/home/wys/:/homw/wys/" 设置主机容器内存共享
+    --device=/dev/dri \ 主机图形硬件
+    --device=/dev/ttyUSB0  \usb驱动
 	--shm-size=8g \增加docker容器共享内存
 	--env="GDK_SYNCHRONIZE=1" \ 禁用MIT-SHM扩展，解决一些X Window系统错误
 	--name xxx \  命名
