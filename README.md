@@ -5,11 +5,15 @@
 - ### ros1:main
 
 ```
+docker images
+docker ps
 xhost +local:`docker inspect --format='{{ .Config.Hostname }}' $containerId`
 xhost +local:`docker inspect --format='{{ .Config.Hostname }}' ros1`
 docker start $containerId
 docker exec -it your_name /bin/bash
-docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
+docker commit <container_id_or_name> <new_image_name>:<tag> #保存容器进度
+docker cp <container_id_or_name>:<container_path> <host_path> #保存容器中某些文件
+docker run -it myimage:v1 /bin/bash
 ```
 
 ```
