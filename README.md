@@ -8,7 +8,8 @@
 docker images
 docker ps
 xhost +local:`docker inspect --format='{{ .Config.Hostname }}' $containerId`
-xhost +local:`docker inspect --format='{{ .Config.Hostname }}' ros1`
+xhost +local:`docker inspect --format='{{ .Config.Hostname }}' ros1` #确保主机开启X11转发
+ssh -X user@hostname #ssh远程登录宿主机，确保X11转发开启，X,Y服务
 docker start $containerId
 docker exec -it your_name /bin/bash
 docker commit <container_id_or_name> <new_image_name>:<tag> #保存容器进度
