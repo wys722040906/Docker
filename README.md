@@ -2,6 +2,13 @@
 
 # 安装
 sudo gedit /etc/docker/daemon.json
+/*
+{
+  "registry-mirrors":["https://docker.m.daocloud.io"],
+  "dns": ["8.8.8.8", "8.8.4.4"],
+  "ipv6": false
+}
+*/
 sudo systemctl daemon-reload
 sudo systemctl restart docker
 docker pull hello-world
