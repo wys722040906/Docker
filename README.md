@@ -1,5 +1,10 @@
 # Docker
 
+# 安装
+sudo gedit /etc/docker/daemon.json
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+docker pull hello-world
 # 启动
 
 - ### ros1:main
